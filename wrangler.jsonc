@@ -2,10 +2,23 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "todo",
   "main": "src/index.ts",
-  "compatibility_date": "2026-05-19"
-  // "compatibility_flags": [
-  //   "nodejs_compat"
-  // ],
+  "compatibility_date": "2026-05-19",
+  "d1_databases": [
+    {
+      "binding": "todo_db",
+      "database_name": "todo-db",
+      "database_id": "7a3280b0-cb26-49ae-90bb-e2428387b7a3",
+      "remote": true,
+    },
+  ],
+  "compatibility_flags": ["nodejs_compat"],
+  "kv_namespaces": [
+    {
+      "binding": "TODO_KV",
+      "id": "a6a3f530fb974125b7cb187953afd6c6",
+      "remote": true,
+    },
+  ],
   // "vars": {
   //   "MY_VAR": "my-variable"
   // },
@@ -31,8 +44,8 @@
   // "ai": {
   //   "binding": "AI"
   // },
-  // "observability": {
-  //   "enabled": true,
-  //   "head_sampling_rate": 1
-  // }
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+  },
 }
