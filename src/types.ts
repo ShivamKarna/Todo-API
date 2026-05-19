@@ -1,27 +1,15 @@
-import type { D1Database, KVNamespace, Queue } from "@cloudflare/workers-types";
-
-export type User = {
-  id: string;
-  name: string;
-  email: string;
-  emailVerified: boolean;
-  image?: string | null | undefined;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import type { D1Database, KVNamespace } from "@cloudflare/workers-types";
 
 export type BindingsType = {
   todo_db: D1Database;
   TODO_KV: KVNamespace;
-
   BETTER_AUTH_URL: string;
   BETTER_AUTH_SECRET: string;
-
   GOOGLE_CLIENT_ID: string;
   GOOGLE_CLIENT_SECRET: string;
-
   ENVIRONMENT: string;
 };
+
 export type AuthUser = {
   id: string;
   name: string;
@@ -31,11 +19,14 @@ export type AuthUser = {
   createdAt: Date;
   updatedAt: Date;
 };
-export type Variables = {
+
+export type AuthSession = {
+  id: string;
+  userId: string;
+  expiresAt: Date;
+};
+
+export type VariablesType = {
   user: AuthUser;
-  session: {
-    id: string;
-    userId: string;
-    expiresAt: Date;
-  };
+  session: AuthSession;
 };
