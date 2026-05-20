@@ -101,7 +101,10 @@ class TodoHandler {
           eq(todos.userId, user.id),
           isNull(todos.deletedAt),
         ),
-      );
+      )
+      .get();
+
+    if (!result) throw new HTTPException(404, { message: "Todo not found" });
 
     return c.json({ success: true, data: result }, 200);
   };
@@ -130,20 +133,24 @@ class TodoHandler {
   updateTodo = async (c: AppContext) => {
     const db = getDb(c.env.todo_db);
     const todoId = c.req.param("id");
+    const user = c.get("user");
+    const body = (await c.req.json()) as UpdateTodoInput;
+
     if (!todoId) {
       throw new HTTPException(404, { message: "Todo not found" });
     }
-    const user = c.get("user");
-    const body = (await c.req.json()) as UpdateTodoInput;
 
     const [updated] = await db
       .update(todos)
       .set({
-        title: body.title,
-        description: body.description,
-        completed: body.completed,
-        dueDate: body.dueDate,
-        priority: body.priority,
+        ...body,
+        completedAt:
+          body.completed === true
+            ? new Date().toISOString()
+            : body.completed === false
+              ? null
+              : undefined,
+        updatedAt: new Date(),
       })
       .where(
         and(
@@ -153,6 +160,10 @@ class TodoHandler {
         ),
       )
       .returning();
+
+    if (!updated) {
+      throw new HTTPException(404, { message: "Todo not found" });
+    }
 
     return c.json(
       { success: true, message: "Todo updated successfully", data: updated },

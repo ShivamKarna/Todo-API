@@ -97,7 +97,7 @@ export const todoListResponseSchema = z
 export const todoSingleResponseSchema = z
   .object({
     success: z.boolean().openapi({ example: true }),
-    data: z.array(todoSchema),
+    data: todoSchema,
   })
   .openapi("TodoSingleResponse");
 
