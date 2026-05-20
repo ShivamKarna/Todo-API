@@ -10,21 +10,14 @@ export type BindingsType = {
   ENVIRONMENT: string;
 };
 
-export type AuthUser = {
-  id: string;
-  name: string;
-  email: string;
-  emailVerified: boolean;
-  image: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-};
+type BetterAuthFactory = typeof import("better-auth").betterAuth;
+type BetterAuthInstance = ReturnType<BetterAuthFactory>;
+export type AuthSessionResult = Awaited<
+  ReturnType<BetterAuthInstance["api"]["getSession"]>
+>;
 
-export type AuthSession = {
-  id: string;
-  userId: string;
-  expiresAt: Date;
-};
+export type AuthUser = NonNullable<AuthSessionResult>["user"];
+export type AuthSession = NonNullable<AuthSessionResult>["session"];
 
 export type VariablesType = {
   user: AuthUser;
