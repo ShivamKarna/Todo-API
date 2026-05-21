@@ -29,6 +29,9 @@ export const todos = sqliteTable(
     priority: text("priority", { enum: ["low", "medium", "high"] }).default(
       "medium",
     ),
+    status: text("status", { enum: ["todo", "in_progress", "done"] }).default(
+      "todo",
+    ),
     deletedAt: integer("deleted_at", {
       mode: "timestamp_ms",
     }),
