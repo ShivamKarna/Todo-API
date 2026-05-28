@@ -32,7 +32,7 @@ export const createAuth = (
       "http://localhost:8787",
       "http://localhost:5173",
       "https://todo.shivamkarn.workers.dev",
-      "https://doloop.pages.dev", // todo fontend url
+      "https://doloop.pages.dev",
     ],
     emailAndPassword: {
       enabled: false,
@@ -41,6 +41,17 @@ export const createAuth = (
       google: {
         clientId: bindings.GOOGLE_CLIENT_ID,
         clientSecret: bindings.GOOGLE_CLIENT_SECRET,
+      },
+    },
+    advanced: {
+      cookies: {
+        sessionToken: {
+          name: "better-auth.session_token",
+          options: {
+            sameSite: "none",
+            secure: true,
+          },
+        },
       },
     },
   });
