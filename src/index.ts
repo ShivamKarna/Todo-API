@@ -21,6 +21,7 @@ app.use("/*", async (c, next) => {
       "http://localhost:5173",
       "http://localhost:3000",
       "https://todo.shivamkarn.workers.dev",
+      "https://doloop.pages.dev",
     ],
     allowMethods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],

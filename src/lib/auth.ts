@@ -31,8 +31,8 @@ export const createAuth = (
     trustedOrigins: [
       "http://localhost:8787",
       "http://localhost:5173",
-      "http://localhost:3000",
       "https://todo.shivamkarn.workers.dev",
+      "https://doloop.pages.dev", // todo fontend url
     ],
     emailAndPassword: {
       enabled: false,
